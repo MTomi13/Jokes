@@ -20,7 +20,7 @@ public class JokeRequester {
     }
 
     public void getRandomJokes(Callback<JokeResponse> callback) {
-        jokeService.getRandomJokes("10").enqueue(callback);
+        jokeService.getRandomJokes("20").enqueue(callback);
     }
 
     public void changeNameOfCharacter(Callback<JokeResponse> callback, Name name) {

@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Funny Chuck</string>
+    <string name="endless_list_title">Joke List</string>
 </resources>

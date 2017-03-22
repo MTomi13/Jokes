@@ -10,6 +10,6 @@ public class NoConnectionException extends IOException {
 
     @Override
     public String getMessage() {
-        return "";
+        return "To use the application, you need internet connection!";
     }
 }

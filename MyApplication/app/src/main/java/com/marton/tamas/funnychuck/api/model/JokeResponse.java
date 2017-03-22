@@ -3,6 +3,7 @@ package com.marton.tamas.funnychuck.api.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.marton.tamas.funnychuck.api.model.Joke;
+import com.marton.tamas.funnychuck.endless_list.model.Item;
 
 import java.util.ArrayList;
 

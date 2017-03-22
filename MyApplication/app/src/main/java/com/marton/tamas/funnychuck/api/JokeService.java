@@ -15,16 +15,16 @@ import retrofit2.http.Query;
 
 public interface JokeService {
 
-    @GET("random" + "{number}")
+    @GET("random/" + "{number}")
     Call<JokeResponse> getRandomJokes(
             @Path("number") String number);
 
-    @GET("random")
+    @GET("random/")
     Call<JokeResponse> changeNameOfCharacter(
             @Query("firstName") String firstName,
             @Query("lastName") String lastName);
 
-    @GET("random" + "{number}")
+    @GET("random/" + "{number}")
     Call<JokeResponse> getJokesExcludeCategory(
             @Path("number") String number,
             @Query("exclude") ArrayList<String> category);

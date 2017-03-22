@@ -1,63 +1,118 @@
 package com.marton.tamas.funnychuck.home;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
-import com.marton.tamas.funnychuck.JokeApplication;
 import com.marton.tamas.funnychuck.R;
-import com.marton.tamas.funnychuck.dependencies.ActivityModule;
+import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import dagger.ObjectGraph;
 
 /**
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements FragmentManager.OnBackStackChangedListener {
 
-    private ObjectGraph activityGraph;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.uiMask)
+    FrameLayout uiMask;
+
+    private FragmentManager supportFragmentManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        setContentView(R.layout.home_activity);
+        setContentView(R.layout.activity_home);
         ButterKnife.bind(this);
 
-        activityGraph = ((JokeApplication) getApplicationContext()).getApplicationGraph().plus(new ActivityModule(this));
-        inject(this);
+        setupToolbar();
     }
 
-    private void inject(Object object) {
-        activityGraph.inject(object);
+    private void setupToolbar() {
+        setSupportActionBar(toolbar);
     }
 
     @OnClick(R.id.btn_random_joke)
-    private void onRandomJokeBtnClicked() {
+    public void onRandomJokeBtnClicked() {
 
     }
 
     @OnClick(R.id.btn_text_input)
-    private void onTextInputBtnClicked() {
+    public void onTextInputBtnClicked() {
 
     }
 
     @OnClick(R.id.btn_lazy_list)
-    private void onEndlessListBtnClicked() {
+    public void onEndlessListBtnClicked() {
+        supportFragmentManager = getSupportFragmentManager();
+        supportFragmentManager.addOnBackStackChangedListener(this);
+        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
+        transaction.addToBackStack(JokeListFragment.class.getSimpleName());
+        transaction.replace(R.id.container, new JokeListFragment());
+        transaction.commit();
+        uiMask.setVisibility(View.VISIBLE);
 
     }
 
     @OnCheckedChanged(R.id.deny_explicit)
-    private void onFilterChecked() {
+    public void onFilterChecked() {
 
     }
 
     @Override
-    protected void onDestroy() {
-        activityGraph = null;
-        super.onDestroy();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                handleBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        handleBackPressed();
+    }
+
+    private void handleBackPressed() {
+        Fragment fragment = supportFragmentManager.findFragmentById(R.id.container);
+        if (fragment != null) {
+            supportFragmentManager.popBackStack();
+            supportFragmentManager.executePendingTransactions();
+            uiMask.setVisibility(View.GONE);
+        } else {
+            finish();
+        }
+        toolbar.setTitle("Funny Chuck");
+    }
+
+    @Override
+    public void onBackStackChanged() {
+        if (supportFragmentManager.getBackStackEntryCount() > 0) {
+            setupHomeAsUpButton(true);
+        } else {
+            setupHomeAsUpButton(false);
+        }
+    }
+
+    private void setupHomeAsUpButton(boolean enable) {
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(enable); // show back button
+        }
     }
 }
