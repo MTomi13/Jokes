@@ -38,8 +38,9 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         super.onCreate(savedInstanceState);
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_home);
-        ButterKnife.bind(this);
 
+        supportFragmentManager = getSupportFragmentManager();
+        ButterKnife.bind(this);
         setupToolbar();
     }
 
@@ -60,7 +61,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     @OnClick(R.id.btn_lazy_list)
     public void onEndlessListBtnClicked() {
-        supportFragmentManager = getSupportFragmentManager();
         supportFragmentManager.addOnBackStackChangedListener(this);
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
@@ -68,7 +68,6 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         transaction.replace(R.id.container, new JokeListFragment());
         transaction.commit();
         uiMask.setVisibility(View.VISIBLE);
-
     }
 
     @OnCheckedChanged(R.id.deny_explicit)
