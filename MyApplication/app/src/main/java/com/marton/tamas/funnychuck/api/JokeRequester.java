@@ -27,7 +27,11 @@ public class JokeRequester {
         jokeService.changeNameOfCharacter(name.getFirstName(), name.getLastName()).enqueue(callback);
     }
 
-    public void getJokesExcludeCategory(Callback<JokeResponse> callback, ArrayList<String> categories) {
-        jokeService.getJokesExcludeCategory("10", categories).enqueue(callback);
+    public void changeNameOfCharacterWithFilter(Callback<JokeResponse> callback, Name name, ArrayList<String> categories) {
+        jokeService.changeNameOfCharacterWithFilter(name.getFirstName(), name.getLastName(), categories).enqueue(callback);
+    }
+
+    public void getJokesExcludeCategory(Callback<JokeResponse> callback, int numberOfJokes, ArrayList<String> categories) {
+        jokeService.getJokesWithFilter(String.valueOf(numberOfJokes), categories).enqueue(callback);
     }
 }

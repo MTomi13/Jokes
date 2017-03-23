@@ -11,7 +11,7 @@ import android.view.View;
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
 import com.marton.tamas.funnychuck.endless_list.model.Item;

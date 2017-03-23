@@ -2,14 +2,15 @@ package com.marton.tamas.funnychuck.dependencies;
 
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.api.JokeRequester;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
-import com.marton.tamas.funnychuck.endless_list.JokeListPresenterImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListView;
+import com.marton.tamas.funnychuck.random_joke.JokeDialogView;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.endless_list.JokeListPresenterImpl;
 import com.marton.tamas.funnychuck.home.HomeActivity;
-import com.marton.tamas.funnychuck.joke.JokeDialogFragment;
-import com.marton.tamas.funnychuck.joke.JokeDialogPresenterImpl;
-import com.marton.tamas.funnychuck.joke.JokeDialogView;
+import com.marton.tamas.funnychuck.random_joke.JokeDialogFragment;
+import com.marton.tamas.funnychuck.random_joke.JokeDialogPresenterImpl;
+import com.marton.tamas.funnychuck.text_input.NameChangeFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -22,7 +23,8 @@ import dagger.Provides;
         injects = {
                 HomeActivity.class,
                 JokeListFragment.class,
-                JokeDialogFragment.class
+                JokeDialogFragment.class,
+                NameChangeFragment.class
         },
         addsTo = NetworkModule.class,
         library = true

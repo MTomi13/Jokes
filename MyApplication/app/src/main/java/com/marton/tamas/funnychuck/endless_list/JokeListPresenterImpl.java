@@ -4,9 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl.JokeInteractorListener;
-import com.marton.tamas.funnychuck.common.JokePresenterImpl;
+import com.marton.tamas.funnychuck.common.JokeFetchListener;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokePresenterImpl;
 import com.marton.tamas.funnychuck.endless_list.model.Item;
 
 import java.util.ArrayList;
@@ -15,14 +15,14 @@ import java.util.ArrayList;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class JokeListPresenterImpl extends JokePresenterImpl implements JokeListPresenter, JokeInteractorListener {
+public class JokeListPresenterImpl extends JokePresenterImpl implements JokeListPresenter, JokeFetchListener {
 
     private JokeListView jokeListView;
 
     public JokeListPresenterImpl(JokeInteractorImpl jokeInteractor, JokeListView jokeListView) {
         super(jokeInteractor, jokeListView);
         this.jokeListView = jokeListView;
-        jokeInteractor.setJokeInteractorListener(this);
+        jokeInteractor.setJokeFetchListener(this);
     }
 
     @Override

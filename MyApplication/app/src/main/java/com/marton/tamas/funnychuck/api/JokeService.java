@@ -24,8 +24,14 @@ public interface JokeService {
             @Query("firstName") String firstName,
             @Query("lastName") String lastName);
 
+    @GET("random/")
+    Call<JokeResponse> changeNameOfCharacterWithFilter(
+            @Query("firstName") String firstName,
+            @Query("lastName") String lastName,
+            @Query("exclude") ArrayList<String> category);
+
     @GET("random/" + "{number}")
-    Call<JokeResponse> getJokesExcludeCategory(
+    Call<JokeResponse> getJokesWithFilter(
             @Path("number") String number,
             @Query("exclude") ArrayList<String> category);
 }

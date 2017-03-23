@@ -1,4 +1,4 @@
-package com.marton.tamas.funnychuck.joke;
+package com.marton.tamas.funnychuck.random_joke;
 
 import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.marton.tamas.funnychuck.BaseDialogFragment;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 
 import java.util.ArrayList;
 

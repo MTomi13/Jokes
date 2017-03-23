@@ -1,4 +1,6 @@
-package com.marton.tamas.funnychuck.common;
+package com.marton.tamas.funnychuck.random_joke_list_common;
+
+import com.marton.tamas.funnychuck.common.BaseJokeView;
 
 /**
  * Created by tamas.marton on 23/03/2017.
@@ -7,11 +9,11 @@ package com.marton.tamas.funnychuck.common;
 public class JokePresenterImpl implements JokePresenter {
 
     private final JokeInteractorImpl jokeInteractor;
-    protected final JokeView jokeView;
+    protected final BaseJokeView baseJokeView;
 
-    public JokePresenterImpl(JokeInteractorImpl jokeInteractor, JokeView jokeView) {
+    public JokePresenterImpl(JokeInteractorImpl jokeInteractor, BaseJokeView baseJokeView) {
         this.jokeInteractor = jokeInteractor;
-        this.jokeView = jokeView;
+        this.baseJokeView = baseJokeView;
     }
 
     @Override

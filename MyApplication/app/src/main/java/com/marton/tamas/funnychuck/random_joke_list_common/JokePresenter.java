@@ -1,4 +1,4 @@
-package com.marton.tamas.funnychuck.common;
+package com.marton.tamas.funnychuck.random_joke_list_common;
 
 /**
  * Created by tamas.marton on 23/03/2017.

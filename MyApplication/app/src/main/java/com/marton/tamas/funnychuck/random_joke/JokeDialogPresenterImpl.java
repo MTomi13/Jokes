@@ -1,23 +1,24 @@
-package com.marton.tamas.funnychuck.joke;
+package com.marton.tamas.funnychuck.random_joke;
 
 import android.view.View;
 
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
-import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
-import com.marton.tamas.funnychuck.common.JokePresenterImpl;
+import com.marton.tamas.funnychuck.common.JokeFetchListener;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokePresenterImpl;
 
 /**
  * Created by tamas.marton on 23/03/2017.
  */
 
-public class JokeDialogPresenterImpl extends JokePresenterImpl implements JokeInteractorImpl.JokeInteractorListener {
+public class JokeDialogPresenterImpl extends JokePresenterImpl implements JokeFetchListener {
 
     private final JokeDialogView jokeDialogView;
 
     public JokeDialogPresenterImpl(JokeInteractorImpl jokeInteractor, JokeDialogView jokeDialogView) {
         super(jokeInteractor, jokeDialogView);
         this.jokeDialogView = jokeDialogView;
-        jokeInteractor.setJokeInteractorListener(this);
+        jokeInteractor.setJokeFetchListener(this);
     }
 
     @SuppressWarnings("unchecked")
