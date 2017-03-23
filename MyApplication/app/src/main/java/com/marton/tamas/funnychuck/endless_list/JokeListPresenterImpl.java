@@ -20,11 +20,16 @@ public class JokeListPresenterImpl extends JokePresenterImpl implements JokeList
     private JokeListView jokeListView;
 
     public JokeListPresenterImpl(JokeInteractorImpl jokeInteractor, JokeListView jokeListView) {
-        super(jokeInteractor, jokeListView);
+        super(jokeInteractor);
         this.jokeListView = jokeListView;
         jokeInteractor.setJokeFetchListener(this);
     }
 
+    /**
+     * @param linearLayoutManager LinearLayoutManager
+     * @param hasFooter boolean
+     *                  add footer progressView to the list
+     */
     @Override
     public void addFooterItem(LinearLayoutManager linearLayoutManager, boolean hasFooter) {
         if (!(hasFooter)) {
@@ -36,6 +41,12 @@ public class JokeListPresenterImpl extends JokePresenterImpl implements JokeList
         }
     }
 
+    /**
+     * @param oldJokes ArrayList<Item>
+     * @param newJokes ArrayList<Item>
+     *                 remove progress item form the list,
+     *                 insert new jokes in to the existing joke array
+     */
     @Override
     public void insertNewJokes(ArrayList<Item> oldJokes, ArrayList<Item> newJokes) {
         int arraySize = oldJokes.size();

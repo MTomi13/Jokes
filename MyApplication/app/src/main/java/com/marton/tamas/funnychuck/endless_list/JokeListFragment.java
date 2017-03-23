@@ -9,7 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.marton.tamas.funnychuck.BaseFragment;
-import com.marton.tamas.funnychuck.GeneralErrorHandler;
+import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
@@ -32,7 +32,9 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 public class JokeListFragment extends BaseFragment implements JokeListView {
 
     private static final int ANIM_DURATION = 800;
-    private static final int REPRESENT_LOADING_DELAY = 5000;
+
+    // delay to represent the progressbar
+    private static final int REPRESENT_LOADING_DELAY = 4000;
     private static final int MAX_FETCH_JOKES_NUMBER = 20;
 
     @BindView(R.id.recyclerView)
@@ -93,6 +95,11 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         setupRecycleViewAdapter(jokes);
     }
 
+    /**
+     * @param jokes ArrayList<Item>
+     *              setup recyclerview adapter, if it is null, create it with animation,
+     *              if it is exist just insert the new jokes
+     */
     private void setupRecycleViewAdapter(ArrayList<Item> jokes) {
         if (adapter == null) {
             adapter = new JokeListAdapter(jokes);
@@ -110,6 +117,9 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         GeneralErrorHandler.showErrorMessage(getActivity(), error);
     }
 
+    /**
+     * add Footer progress view item to the list, and start fetching the new items
+     */
     @Override
     public void showListWithFooter() {
         adapter.getJokesArrayList().add(new Footer());

@@ -11,7 +11,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.marton.tamas.funnychuck.BaseFragment;
-import com.marton.tamas.funnychuck.GeneralErrorHandler;
+import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
 import com.marton.tamas.funnychuck.util.Constants;

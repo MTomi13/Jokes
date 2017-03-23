@@ -24,11 +24,19 @@ public class JokeInteractorImpl implements JokeInteractor, Callback<JokeListResp
         this.jokeRequester = jokeRequester;
     }
 
+    /**
+     * @param numberOfJokes int
+     *                      get jokes form api without filtering
+     */
     @Override
     public void getJokesFromApi(int numberOfJokes) {
         jokeRequester.getRandomJokes(this, numberOfJokes);
     }
 
+    /**
+     * @param numberOfJokes int
+     *                      get jokes from api with filtering
+     */
     @Override
     public void getFilteredJokesFromApi(int numberOfJokes) {
         ArrayList<String> categories = new ArrayList<>();

@@ -25,11 +25,19 @@ public class NameChangeInteractorImpl implements NameChangeInteractor, Callback<
         this.jokeRequester = jokeRequester;
     }
 
+    /**
+     * @param name Name
+     *             change the name of character without filtering
+     */
     @Override
     public void getJokeWithChangedName(Name name) {
         jokeRequester.changeNameOfCharacter(this, name);
     }
 
+    /**
+     * @param name Name
+     *            change the name of character with filtering
+     */
     @Override
     public void getJokeWithChangedNameAndFilter(Name name) {
         ArrayList<String> categories = new ArrayList<>();

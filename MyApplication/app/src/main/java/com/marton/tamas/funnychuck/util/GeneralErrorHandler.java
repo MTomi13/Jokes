@@ -1,4 +1,4 @@
-package com.marton.tamas.funnychuck;
+package com.marton.tamas.funnychuck.util;
 
 import android.app.Activity;
 import android.support.design.widget.Snackbar;

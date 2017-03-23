@@ -12,12 +12,12 @@ import okhttp3.Response;
 /**
  * Created by tamas.marton on 21/03/2017.
  */
-
-public class NoConnectionInterceptor implements Interceptor {
+//custom interceptor to handle no internet connection exception
+class NoConnectionInterceptor implements Interceptor {
 
     private final ConnectivityManager connectivityManager;
 
-    public NoConnectionInterceptor(ConnectivityManager connectivityManager) {
+    NoConnectionInterceptor(ConnectivityManager connectivityManager) {
         this.connectivityManager = connectivityManager;
     }
 
@@ -30,6 +30,10 @@ public class NoConnectionInterceptor implements Interceptor {
         return chain.proceed(builder.build());
     }
 
+    /**
+     * @return NetworkInfo
+     * check connection to the internet
+     */
     private boolean isConnected() {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
         return networkInfo != null && networkInfo.isConnectedOrConnecting();

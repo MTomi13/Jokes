@@ -1,6 +1,5 @@
 package com.marton.tamas.funnychuck.text_input;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
@@ -23,23 +22,39 @@ public class NameChangePresenterImpl implements NameChangePresenter, JokeFetchLi
         nameChangeInteractor.setJokeFetchListener(this);
     }
 
+    /**
+     * @param isFilterNeeded boolean
+     * @param fullName       String
+     *                       method to start data fetching and decide need filtering or not
+     */
     @Override
     public void getJokesWithChangedName(boolean isFilterNeeded, String fullName) {
         if (!fullName.equals(Constants.EMPTY_STRING)) {
-            nameChangeView.showProgressRing(View.VISIBLE);
             Name name = getName(fullName);
-            if (isFilterNeeded) {
-                nameChangeInteractor.getJokeWithChangedNameAndFilter(name);
-            } else {
-                nameChangeInteractor.getJokeWithChangedName(name);
+            if (name != null) {
+                nameChangeView.showProgressRing(View.VISIBLE);
+                if (isFilterNeeded) {
+                    nameChangeInteractor.getJokeWithChangedNameAndFilter(name);
+                } else {
+                    nameChangeInteractor.getJokeWithChangedName(name);
+                }
             }
         }
     }
 
-    @NonNull
+    /**
+     * @param fullName String
+     * @return Name
+     * split string with the first space, to create Name object
+     */
     private Name getName(String fullName) {
         String[] splitedName = fullName.split("\\s+");
-        return new Name(splitedName[0], splitedName[1]);
+        if (splitedName.length != 2) {
+            nameChangeView.showError("Pls use just one Firstname, and Lastname to change the character name!");
+            return null;
+        } else {
+            return new Name(splitedName[0], splitedName[1]);
+        }
     }
 
     @SuppressWarnings("unchecked")

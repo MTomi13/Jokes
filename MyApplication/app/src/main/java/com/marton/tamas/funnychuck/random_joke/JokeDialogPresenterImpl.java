@@ -16,7 +16,7 @@ public class JokeDialogPresenterImpl extends JokePresenterImpl implements JokeFe
     private final JokeContentView jokeContentView;
 
     public JokeDialogPresenterImpl(JokeInteractorImpl jokeInteractor, JokeContentView jokeContentView) {
-        super(jokeInteractor, jokeContentView);
+        super(jokeInteractor);
         this.jokeContentView = jokeContentView;
         jokeInteractor.setJokeFetchListener(this);
     }

@@ -42,10 +42,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         setContentView(R.layout.activity_home);
 
-        supportFragmentManager = getSupportFragmentManager();
-        supportFragmentManager.addOnBackStackChangedListener(this);
+        setupFragmentManager();
         ButterKnife.bind(this);
         setupToolbar();
+    }
+
+    private void setupFragmentManager() {
+        supportFragmentManager = getSupportFragmentManager();
+        supportFragmentManager.addOnBackStackChangedListener(this);
     }
 
     private void setupToolbar() {
@@ -97,18 +101,25 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         handleBackPressed();
     }
 
+    /**
+     * handle back button pressed, if there is a fragment is visible, pop out form backstack,
+     * if there is no more fragment, finish the activity
+     */
     private void handleBackPressed() {
         Fragment fragment = supportFragmentManager.findFragmentById(R.id.container);
         if (fragment != null) {
             supportFragmentManager.popBackStack();
             supportFragmentManager.executePendingTransactions();
             uiMask.setVisibility(View.GONE);
+            toolbar.setTitle(R.string.app_name);
         } else {
             finish();
         }
-        toolbar.setTitle(R.string.app_name);
     }
 
+    /**
+     * remove home arrow from the toolbar if there is no fragment in the backstack
+     */
     @Override
     public void onBackStackChanged() {
         if (supportFragmentManager.getBackStackEntryCount() > 0) {
