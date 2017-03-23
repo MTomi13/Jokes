@@ -12,7 +12,8 @@ import android.widget.FrameLayout;
 
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
-import com.marton.tamas.funnychuck.joke.JokeDialogFragment;
+import com.marton.tamas.funnychuck.random_joke.JokeDialogFragment;
+import com.marton.tamas.funnychuck.text_input.NameChangeFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         setContentView(R.layout.activity_home);
 
         supportFragmentManager = getSupportFragmentManager();
+        supportFragmentManager.addOnBackStackChangedListener(this);
         ButterKnife.bind(this);
         setupToolbar();
     }
@@ -56,12 +58,16 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     @OnClick(R.id.btn_text_input)
     public void onTextInputBtnClicked() {
-
+        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
+        transaction.addToBackStack(NameChangeFragment.class.getSimpleName());
+        transaction.replace(R.id.container, new NameChangeFragment());
+        transaction.commit();
+        uiMask.setVisibility(View.VISIBLE);
     }
 
     @OnClick(R.id.btn_lazy_list)
     public void onEndlessListBtnClicked() {
-        supportFragmentManager.addOnBackStackChangedListener(this);
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
         transaction.addToBackStack(JokeListFragment.class.getSimpleName());
