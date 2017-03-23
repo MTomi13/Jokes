@@ -2,22 +2,19 @@ package com.marton.tamas.funnychuck.api.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.marton.tamas.funnychuck.api.model.Joke;
-import com.marton.tamas.funnychuck.endless_list.model.Item;
-
-import java.util.ArrayList;
 
 /**
- * Created by tamas.marton on 21/03/2017.
+ * Created by tamas.marton on 23/03/2017.
  */
 
 public class JokeResponse {
 
     @Expose
     private String type;
+
     @SerializedName("value")
     @Expose
-    private ArrayList<Joke> jokeList;
+    private Joke joke;
 
     public String getType() {
         return type;
@@ -27,11 +24,11 @@ public class JokeResponse {
         this.type = type;
     }
 
-    public ArrayList<Joke> getJokeList() {
-        return jokeList;
+    public Joke getJoke() {
+        return joke;
     }
 
-    public void setJokeList(ArrayList<Joke> jokeList) {
-        this.jokeList = jokeList;
+    public void setJoke(Joke joke) {
+        this.joke = joke;
     }
 }

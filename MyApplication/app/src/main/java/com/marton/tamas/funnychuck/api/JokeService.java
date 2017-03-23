@@ -1,5 +1,6 @@
 package com.marton.tamas.funnychuck.api;
 
+import com.marton.tamas.funnychuck.api.model.JokeListResponse;
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
 
 import java.util.ArrayList;
@@ -16,22 +17,22 @@ import retrofit2.http.Query;
 public interface JokeService {
 
     @GET("random/" + "{number}")
-    Call<JokeResponse> getRandomJokes(
+    Call<JokeListResponse> getRandomJokes(
             @Path("number") String number);
 
-    @GET("random/")
+    @GET("random")
     Call<JokeResponse> changeNameOfCharacter(
             @Query("firstName") String firstName,
             @Query("lastName") String lastName);
 
-    @GET("random/")
+    @GET("random")
     Call<JokeResponse> changeNameOfCharacterWithFilter(
             @Query("firstName") String firstName,
             @Query("lastName") String lastName,
             @Query("exclude") ArrayList<String> category);
 
     @GET("random/" + "{number}")
-    Call<JokeResponse> getJokesWithFilter(
+    Call<JokeListResponse> getJokesWithFilter(
             @Path("number") String number,
             @Query("exclude") ArrayList<String> category);
 }

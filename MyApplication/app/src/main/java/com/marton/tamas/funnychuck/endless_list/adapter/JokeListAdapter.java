@@ -59,7 +59,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
         Item joke = jokesArrayList.get(position);
         if (holder instanceof JokeViewHolder) {
-            ((JokeViewHolder) holder).content.setText(((Joke) joke).getJoke());
+            ((JokeViewHolder) holder).jokeTextView.setText(((Joke) joke).getJoke());
         }
     }
 
@@ -79,7 +79,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     class JokeViewHolder extends BaseViewHolder {
 
         @BindView(R.id.joke_text)
-        TextView content;
+        TextView jokeTextView;
 
         public JokeViewHolder(final View itemView) {
             super(itemView);

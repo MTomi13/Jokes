@@ -1,5 +1,6 @@
 package com.marton.tamas.funnychuck.api;
 
+import com.marton.tamas.funnychuck.api.model.JokeListResponse;
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
 import com.marton.tamas.funnychuck.api.model.Name;
 
@@ -19,7 +20,7 @@ public class JokeRequester {
         this.jokeService = jokeService;
     }
 
-    public void getRandomJokes(Callback<JokeResponse> callback, int numberOfJokes) {
+    public void getRandomJokes(Callback<JokeListResponse> callback, int numberOfJokes) {
         jokeService.getRandomJokes(String.valueOf(numberOfJokes)).enqueue(callback);
     }
 
@@ -31,7 +32,7 @@ public class JokeRequester {
         jokeService.changeNameOfCharacterWithFilter(name.getFirstName(), name.getLastName(), categories).enqueue(callback);
     }
 
-    public void getJokesExcludeCategory(Callback<JokeResponse> callback, int numberOfJokes, ArrayList<String> categories) {
+    public void getJokesExcludeCategory(Callback<JokeListResponse> callback, int numberOfJokes, ArrayList<String> categories) {
         jokeService.getJokesWithFilter(String.valueOf(numberOfJokes), categories).enqueue(callback);
     }
 }

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="15dp"
     android:background="@android:color/white"
-    android:padding="10dp"
     android:orientation="vertical">
 
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/emailLayout"
+        android:id="@+id/personLayout"
         style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,13 +17,33 @@
             android:id="@+id/personEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="firstname / lastname"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+            android:hint="firstname / lastname"
             android:inputType="textPersonName|textCapWords|text" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/btn_submit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/personLayout"
         android:text="Submit" />
-</LinearLayout>
+
+    <TextView
+        android:id="@+id/joke_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_submit"
+        android:layout_marginTop="40dp"
+        tools:text="Chuck Norris was banned from competitive bullriding after a 1992 exhibition in San Antonio, when he rode the bull 1,346 miles from Texas to Milwaukee Wisconsin to pick up his dry cleaning." />
+
+    <ProgressBar
+        android:id="@+id/progress_ring"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_submit"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:visibility="gone" />
+</RelativeLayout>

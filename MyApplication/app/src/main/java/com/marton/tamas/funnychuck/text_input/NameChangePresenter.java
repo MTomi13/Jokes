@@ -6,5 +6,5 @@ package com.marton.tamas.funnychuck.text_input;
 
 public interface NameChangePresenter {
 
-    void getJokesWithChangedName(boolean isFilterNeeded, String firstName, String lastName);
+    void getJokesWithChangedName(boolean isFilterNeeded, String fullName);
 }

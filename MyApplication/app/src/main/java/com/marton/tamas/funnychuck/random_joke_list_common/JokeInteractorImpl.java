@@ -1,7 +1,7 @@
 package com.marton.tamas.funnychuck.random_joke_list_common;
 
 import com.marton.tamas.funnychuck.api.JokeRequester;
-import com.marton.tamas.funnychuck.api.model.JokeResponse;
+import com.marton.tamas.funnychuck.api.model.JokeListResponse;
 import com.marton.tamas.funnychuck.common.JokeFetchListener;
 import com.marton.tamas.funnychuck.util.Constants;
 
@@ -15,7 +15,7 @@ import retrofit2.Response;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class JokeInteractorImpl implements JokeInteractor, Callback<JokeResponse> {
+public class JokeInteractorImpl implements JokeInteractor, Callback<JokeListResponse> {
 
     private JokeRequester jokeRequester;
     private JokeFetchListener jokeFetchListener;
@@ -42,12 +42,12 @@ public class JokeInteractorImpl implements JokeInteractor, Callback<JokeResponse
     }
 
     @Override
-    public void onResponse(Call<JokeResponse> call, Response<JokeResponse> response) {
+    public void onResponse(Call<JokeListResponse> call, Response<JokeListResponse> response) {
         jokeFetchListener.onFetchJokesSuccess(response.body());
     }
 
     @Override
-    public void onFailure(Call<JokeResponse> call, Throwable throwable) {
+    public void onFailure(Call<JokeListResponse> call, Throwable throwable) {
         jokeFetchListener.onFetchJokesFailed(throwable.getLocalizedMessage());
     }
 }

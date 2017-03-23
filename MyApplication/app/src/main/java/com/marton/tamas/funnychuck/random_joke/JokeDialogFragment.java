@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
  * Created by tamas.marton on 23/03/2017.
  */
 
-public class JokeDialogFragment extends BaseDialogFragment implements JokeDialogView {
+public class JokeDialogFragment extends BaseDialogFragment implements JokeContentView {
 
     private TextView textView;
     private ProgressBar progressBar;

@@ -7,4 +7,6 @@ package com.marton.tamas.funnychuck.util;
 public class Constants {
 
     public static final String CATEGORY_EXPLICIT = "explicit";
+
+    public static final String EMPTY_STRING = "";
 }

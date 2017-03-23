@@ -1,42 +1,57 @@
 package com.marton.tamas.funnychuck.text_input;
 
+import android.support.annotation.NonNull;
+import android.view.View;
+
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
 import com.marton.tamas.funnychuck.api.model.Name;
 import com.marton.tamas.funnychuck.common.JokeFetchListener;
-import com.marton.tamas.funnychuck.common.BaseJokeView;
+import com.marton.tamas.funnychuck.util.Constants;
 
 /**
  * Created by tamas.marton on 23/03/2017.
  */
 
-public class NameChangePresenterImpl implements NameChangePresenter, JokeFetchListener {
+public class NameChangePresenterImpl implements NameChangePresenter, JokeFetchListener<JokeResponse> {
 
     private NameChangeInteractorImpl nameChangeInteractor;
-    private BaseJokeView baseJokeView;
+    private NameChangeView nameChangeView;
 
-    public NameChangePresenterImpl(NameChangeInteractorImpl nameChangeInteractor, BaseJokeView baseJokeView) {
+    public NameChangePresenterImpl(NameChangeInteractorImpl nameChangeInteractor, NameChangeView nameChangeView) {
         this.nameChangeInteractor = nameChangeInteractor;
-        this.baseJokeView = baseJokeView;
+        this.nameChangeView = nameChangeView;
+        nameChangeInteractor.setJokeFetchListener(this);
     }
 
     @Override
-    public void getJokesWithChangedName(boolean isFilterNeeded, String firstName, String lastName) {
-        Name name = new Name(firstName, lastName);
-        if (isFilterNeeded) {
-            nameChangeInteractor.getJokeWithChangedName(name);
-        } else {
-            nameChangeInteractor.getJokeWithChangedNameAndFilter(name);
+    public void getJokesWithChangedName(boolean isFilterNeeded, String fullName) {
+        nameChangeView.showProgressRing(View.VISIBLE);
+        Name name = getName(fullName);
+        if (!fullName.equals(Constants.EMPTY_STRING)) {
+            if (isFilterNeeded) {
+                nameChangeInteractor.getJokeWithChangedNameAndFilter(name);
+            } else {
+                nameChangeInteractor.getJokeWithChangedName(name);
+            }
         }
+    }
+
+    @NonNull
+    private Name getName(String fullName) {
+        String[] splitedName = fullName.split("\\s+");
+        return new Name(splitedName[0], splitedName[1]);
     }
 
     @SuppressWarnings("unchecked")
     @Override
     public void onFetchJokesSuccess(JokeResponse jokeResponse) {
-        baseJokeView.showJokes(jokeResponse.getJokeList());
+        nameChangeView.showProgressRing(View.GONE);
+        nameChangeView.showJoke(jokeResponse.getJoke());
     }
 
     @Override
     public void onFetchJokesFailed(String errorMessage) {
-        baseJokeView.showError(errorMessage);
+        nameChangeView.showProgressRing(View.GONE);
+        nameChangeView.showError(errorMessage);
     }
 }

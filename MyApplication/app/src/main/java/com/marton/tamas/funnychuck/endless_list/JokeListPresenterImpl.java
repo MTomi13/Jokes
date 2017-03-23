@@ -3,7 +3,7 @@ package com.marton.tamas.funnychuck.endless_list;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.marton.tamas.funnychuck.api.model.JokeResponse;
+import com.marton.tamas.funnychuck.api.model.JokeListResponse;
 import com.marton.tamas.funnychuck.common.JokeFetchListener;
 import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.random_joke_list_common.JokePresenterImpl;
@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class JokeListPresenterImpl extends JokePresenterImpl implements JokeListPresenter, JokeFetchListener {
+public class JokeListPresenterImpl extends JokePresenterImpl implements JokeListPresenter, JokeFetchListener<JokeListResponse> {
 
     private JokeListView jokeListView;
 
@@ -45,14 +45,14 @@ public class JokeListPresenterImpl extends JokePresenterImpl implements JokeList
     }
 
     @Override
-    public void onFetchJokesSuccess(JokeResponse jokeResponse) {
-        jokeListView.showJokes(createNewItemList(jokeResponse));
+    public void onFetchJokesSuccess(JokeListResponse jokeListResponse) {
+        jokeListView.showJokes(createNewItemList(jokeListResponse));
     }
 
     @NonNull
-    private ArrayList<Item> createNewItemList(JokeResponse jokeResponse) {
+    private ArrayList<Item> createNewItemList(JokeListResponse jokeListResponse) {
         ArrayList<Item> newList = new ArrayList<>();
-        newList.addAll(jokeResponse.getJokeList());
+        newList.addAll(jokeListResponse.getJokeList());
         return newList;
     }
 

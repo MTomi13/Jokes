@@ -3,14 +3,17 @@ package com.marton.tamas.funnychuck.dependencies;
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.api.JokeRequester;
 import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
-import com.marton.tamas.funnychuck.endless_list.JokeListView;
-import com.marton.tamas.funnychuck.random_joke.JokeDialogView;
-import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListPresenterImpl;
+import com.marton.tamas.funnychuck.endless_list.JokeListView;
 import com.marton.tamas.funnychuck.home.HomeActivity;
+import com.marton.tamas.funnychuck.random_joke.JokeContentView;
 import com.marton.tamas.funnychuck.random_joke.JokeDialogFragment;
 import com.marton.tamas.funnychuck.random_joke.JokeDialogPresenterImpl;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.text_input.NameChangeFragment;
+import com.marton.tamas.funnychuck.text_input.NameChangeInteractorImpl;
+import com.marton.tamas.funnychuck.text_input.NameChangePresenterImpl;
+import com.marton.tamas.funnychuck.text_input.NameChangeView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -43,8 +46,8 @@ public class ActivityModule {
     }
 
     @Provides
-    JokeDialogPresenterImpl provideJokeDialogPresenterImpl(JokeInteractorImpl jokeInteractor, JokeDialogView jokeDialogView) {
-        return new JokeDialogPresenterImpl(jokeInteractor, jokeDialogView);
+    JokeDialogPresenterImpl provideJokeDialogPresenterImpl(JokeInteractorImpl jokeInteractor, JokeContentView jokeContentView) {
+        return new JokeDialogPresenterImpl(jokeInteractor, jokeContentView);
     }
 
     @Provides
@@ -53,12 +56,27 @@ public class ActivityModule {
     }
 
     @Provides
+    NameChangePresenterImpl provideNameChangePresenterImpl(NameChangeInteractorImpl nameChangeInteractor, NameChangeView nameChangeView) {
+        return new NameChangePresenterImpl(nameChangeInteractor, nameChangeView);
+    }
+
+    @Provides
+    NameChangeInteractorImpl provideNameChangeInteractorImpl(JokeRequester jokeRequester) {
+        return new NameChangeInteractorImpl(jokeRequester);
+    }
+
+    @Provides
     JokeListView provideJokeListView() {
         return (JokeListView) baseFragment;
     }
 
     @Provides
-    JokeDialogView provideJokeDialogView() {
-        return (JokeDialogView) baseFragment;
+    JokeContentView provideJokeContentView() {
+        return (JokeContentView) baseFragment;
+    }
+
+    @Provides
+    NameChangeView provideNameChangeView() {
+        return (NameChangeView) baseFragment;
     }
 }

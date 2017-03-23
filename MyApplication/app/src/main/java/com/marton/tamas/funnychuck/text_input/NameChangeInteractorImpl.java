@@ -42,6 +42,7 @@ public class NameChangeInteractorImpl implements NameChangeInteractor, Callback<
         this.jokeFetchListener = jokeFetchListener;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onResponse(Call<JokeResponse> call, Response<JokeResponse> response) {
         jokeFetchListener.onFetchJokesSuccess(response.body());

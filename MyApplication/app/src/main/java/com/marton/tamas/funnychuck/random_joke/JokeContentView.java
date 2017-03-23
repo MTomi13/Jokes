@@ -7,7 +7,7 @@ import com.marton.tamas.funnychuck.common.BaseJokeView;
  * Created by tamas.marton on 23/03/2017.
  */
 
-public interface JokeDialogView extends BaseJokeView<Joke> {
+public interface JokeContentView extends BaseJokeView<Joke> {
 
     void showProgressRing(int visibility);
 }
