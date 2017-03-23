@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Funny Chuck</string>
     <string name="endless_list_title">Joke List</string>
+    <string name="joke_dialog_title">The Joke</string>
 </resources>

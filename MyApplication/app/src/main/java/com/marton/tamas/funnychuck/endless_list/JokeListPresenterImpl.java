@@ -34,14 +34,6 @@ public class JokeListPresenterImpl implements JokeListPresenter, JokeListInterac
     }
 
     @Override
-    public void insertNewJokes(ArrayList<Item> oldJokes, ArrayList<Item> newJokes) {
-        int arraySize = oldJokes.size();
-        oldJokes.remove(arraySize - 1);
-        oldJokes.addAll(newJokes);
-        jokeListView.showExtendedList(arraySize - 1, oldJokes.size() - arraySize);
-    }
-
-    @Override
     public void addFooterItem(LinearLayoutManager linearLayoutManager, boolean hasFooter) {
         if (!(hasFooter)) {
             //position starts at 0
@@ -50,6 +42,14 @@ public class JokeListPresenterImpl implements JokeListPresenter, JokeListInterac
                 jokeListView.showListWithFooter();
             }
         }
+    }
+
+    @Override
+    public void insertNewJokes(ArrayList<Item> oldJokes, ArrayList<Item> newJokes) {
+        int arraySize = oldJokes.size();
+        oldJokes.remove(arraySize - 1);
+        oldJokes.addAll(newJokes);
+        jokeListView.showExtendedList(arraySize - 1, oldJokes.size() - arraySize);
     }
 
     @Override

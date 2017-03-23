@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.marton.tamas.funnychuck.BaseFragment;
@@ -53,6 +54,11 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         setToolbarTitle(getString(R.string.endless_list_title));
         setupRecyclerView();
         jokeListPresenter.getJokes(false);
+    }
+
+    protected void setToolbarTitle(String title) {
+        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
+        toolbar.setTitle(title);
     }
 
     private void setupRecyclerView() {

@@ -14,7 +14,7 @@ public interface JokeListPresenter {
 
     void getJokes(boolean isFilterNeeded);
 
-    void insertNewJokes(ArrayList<Item> oldJokes, ArrayList<Item> newJokes);
-
     void addFooterItem(LinearLayoutManager linearLayoutManager, boolean hasFooter);
+
+    void insertNewJokes(ArrayList<Item> oldJokes, ArrayList<Item> newJokes);
 }

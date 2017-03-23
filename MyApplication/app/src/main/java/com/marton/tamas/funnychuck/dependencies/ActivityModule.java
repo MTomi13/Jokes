@@ -9,6 +9,7 @@ import com.marton.tamas.funnychuck.endless_list.JokeListInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListPresenterImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListView;
 import com.marton.tamas.funnychuck.home.HomeActivity;
+import com.marton.tamas.funnychuck.joke.JokeDialogFragment;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,8 +21,8 @@ import dagger.Provides;
 @Module(
         injects = {
                 HomeActivity.class,
-                BaseFragment.class,
-                JokeListFragment.class
+                JokeListFragment.class,
+                JokeDialogFragment.class
         },
         addsTo = NetworkModule.class,
         library = true

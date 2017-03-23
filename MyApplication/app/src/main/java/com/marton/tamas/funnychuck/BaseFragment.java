@@ -3,8 +3,7 @@ package com.marton.tamas.funnychuck;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.Toolbar;
+import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,7 @@ import dagger.ObjectGraph;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends DialogFragment {
 
     private ObjectGraph activityGraph;
 
@@ -35,11 +34,6 @@ public abstract class BaseFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         activityGraph = ((JokeApplication) getActivity().getApplicationContext()).getApplicationGraph().plus(new ActivityModule(this));
         activityGraph.inject(this);
-    }
-
-    protected void setToolbarTitle(String title) {
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
     }
 
     @Override

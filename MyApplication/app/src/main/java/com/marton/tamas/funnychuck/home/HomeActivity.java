@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
+import com.marton.tamas.funnychuck.joke.JokeDialogFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -48,7 +49,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     @OnClick(R.id.btn_random_joke)
     public void onRandomJokeBtnClicked() {
-
+        JokeDialogFragment jokeDialogFragment = JokeDialogFragment.getInstance();
+        jokeDialogFragment.show(getSupportFragmentManager(), JokeDialogFragment.class.getSimpleName());
     }
 
     @OnClick(R.id.btn_text_input)
