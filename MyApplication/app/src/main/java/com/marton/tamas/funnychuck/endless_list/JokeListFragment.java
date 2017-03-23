@@ -11,6 +11,7 @@ import android.view.View;
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
+import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
 import com.marton.tamas.funnychuck.endless_list.model.Item;
@@ -31,12 +32,13 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
 
     private static final int ANIM_DURATION = 800;
     private static final int REPRESENT_LOADING_DELAY = 2000;
+    private static final int MAX_FETCH_JOKES_NUMBER = 20;
 
     @BindView(R.id.recyclerView)
     RecyclerView recyclerView;
 
     @Inject
-    JokeListInteractorImpl jokeListInteractor;
+    JokeInteractorImpl jokeListInteractor;
 
     @Inject
     JokeListPresenterImpl jokeListPresenter;
@@ -53,7 +55,7 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         super.onViewCreated(view, savedInstanceState);
         setToolbarTitle(getString(R.string.endless_list_title));
         setupRecyclerView();
-        jokeListPresenter.getJokes(false);
+        jokeListPresenter.getJokes(false, MAX_FETCH_JOKES_NUMBER);
     }
 
     protected void setToolbarTitle(String title) {
@@ -106,7 +108,7 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                jokeListPresenter.getJokes(false);
+                jokeListPresenter.getJokes(false, MAX_FETCH_JOKES_NUMBER);
             }
         }, REPRESENT_LOADING_DELAY);
     }

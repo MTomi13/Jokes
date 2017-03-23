@@ -19,8 +19,8 @@ public class JokeRequester {
         this.jokeService = jokeService;
     }
 
-    public void getRandomJokes(Callback<JokeResponse> callback) {
-        jokeService.getRandomJokes("20").enqueue(callback);
+    public void getRandomJokes(Callback<JokeResponse> callback, int numberOfJokes) {
+        jokeService.getRandomJokes(String.valueOf(numberOfJokes)).enqueue(callback);
     }
 
     public void changeNameOfCharacter(Callback<JokeResponse> callback, Name name) {

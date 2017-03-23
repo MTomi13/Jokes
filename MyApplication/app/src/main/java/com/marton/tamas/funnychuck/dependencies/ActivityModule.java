@@ -1,15 +1,15 @@
 package com.marton.tamas.funnychuck.dependencies;
 
-import android.content.Context;
-
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.api.JokeRequester;
+import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListFragment;
-import com.marton.tamas.funnychuck.endless_list.JokeListInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListPresenterImpl;
 import com.marton.tamas.funnychuck.endless_list.JokeListView;
 import com.marton.tamas.funnychuck.home.HomeActivity;
 import com.marton.tamas.funnychuck.joke.JokeDialogFragment;
+import com.marton.tamas.funnychuck.joke.JokeDialogPresenterImpl;
+import com.marton.tamas.funnychuck.joke.JokeDialogView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -36,17 +36,27 @@ public class ActivityModule {
     }
 
     @Provides
-    JokeListPresenterImpl provideJokeListPresenterImpl(JokeListInteractorImpl jokeListInteractor, JokeListView jokeListView) {
-        return new JokeListPresenterImpl(jokeListInteractor, jokeListView);
+    JokeListPresenterImpl provideJokeListPresenterImpl(JokeInteractorImpl jokeInteractor, JokeListView jokeListView) {
+        return new JokeListPresenterImpl(jokeInteractor, jokeListView);
     }
 
     @Provides
-    JokeListInteractorImpl provideJokeListInteractorImpl(JokeRequester jokeRequester) {
-        return new JokeListInteractorImpl(jokeRequester);
+    JokeDialogPresenterImpl provideJokeDialogPresenterImpl(JokeInteractorImpl jokeInteractor, JokeDialogView jokeDialogView) {
+        return new JokeDialogPresenterImpl(jokeInteractor, jokeDialogView);
+    }
+
+    @Provides
+    JokeInteractorImpl provideJokeInteractorImpl(JokeRequester jokeRequester) {
+        return new JokeInteractorImpl(jokeRequester);
     }
 
     @Provides
     JokeListView provideJokeListView() {
         return (JokeListView) baseFragment;
+    }
+
+    @Provides
+    JokeDialogView provideJokeDialogView() {
+        return (JokeDialogView) baseFragment;
     }
 }

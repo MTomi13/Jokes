@@ -4,7 +4,9 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.marton.tamas.funnychuck.api.model.JokeResponse;
-import com.marton.tamas.funnychuck.endless_list.JokeListInteractorImpl.JokeListInteractorListener;
+import com.marton.tamas.funnychuck.common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.common.JokeInteractorImpl.JokeInteractorListener;
+import com.marton.tamas.funnychuck.common.JokePresenterImpl;
 import com.marton.tamas.funnychuck.endless_list.model.Item;
 
 import java.util.ArrayList;
@@ -13,24 +15,14 @@ import java.util.ArrayList;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class JokeListPresenterImpl implements JokeListPresenter, JokeListInteractorListener {
+public class JokeListPresenterImpl extends JokePresenterImpl implements JokeListPresenter, JokeInteractorListener {
 
-    private JokeListInteractorImpl jokeListInteractor;
     private JokeListView jokeListView;
 
-    public JokeListPresenterImpl(JokeListInteractorImpl jokeListInteractor, JokeListView jokeListView) {
-        this.jokeListInteractor = jokeListInteractor;
+    public JokeListPresenterImpl(JokeInteractorImpl jokeInteractor, JokeListView jokeListView) {
+        super(jokeInteractor, jokeListView);
         this.jokeListView = jokeListView;
-    }
-
-    @Override
-    public void getJokes(boolean isFilterNeeded) {
-        jokeListInteractor.setJokeListInteractorListener(this);
-        if (isFilterNeeded) {
-            jokeListInteractor.getFilteredJokesFromApi();
-        } else {
-            jokeListInteractor.getJokesFromApi();
-        }
+        jokeInteractor.setJokeInteractorListener(this);
     }
 
     @Override
