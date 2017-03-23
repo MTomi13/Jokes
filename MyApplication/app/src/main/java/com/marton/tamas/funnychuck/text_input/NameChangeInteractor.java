@@ -7,7 +7,7 @@ import com.marton.tamas.funnychuck.common.BaseJokeInteractor;
  * Created by tamas.marton on 23/03/2017.
  */
 
-public interface NameChangeInteractor extends BaseJokeInteractor {
+interface NameChangeInteractor extends BaseJokeInteractor {
 
     void getJokeWithChangedName(Name name);
 

@@ -2,7 +2,6 @@ package com.marton.tamas.funnychuck.endless_list;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,7 +45,6 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     JokeListPresenterImpl jokeListPresenter;
 
     private JokeListAdapter adapter;
-    private Parcelable savedValue;
 
     @Override
     protected int layoutId() {
@@ -69,27 +67,7 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         jokeListPresenter.getJokes(isFilter, MAX_FETCH_JOKES_NUMBER);
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        outState.putParcelable("SAVED_LAYOUT_MANAGER", recyclerView.getLayoutManager().onSaveInstanceState());
-        super.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        if (savedInstanceState != null) {
-            savedValue =  savedInstanceState.getParcelable("SAVED_LAYOUT_MANAGER");
-        }
-        super.onViewStateRestored(savedInstanceState);
-    }
-
-    private void restoreLayoutManagerPosition() {
-        if (savedValue != null) {
-            recyclerView.getLayoutManager().onRestoreInstanceState(savedValue);
-        }
-    }
-
-    protected void setToolbarTitle(String title) {
+    private void setToolbarTitle(String title) {
         Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
         toolbar.setTitle(title);
     }
@@ -122,11 +100,9 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
             ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
             scaleAdapter.setDuration(ANIM_DURATION);
             recyclerView.setAdapter(scaleAdapter);
-
         } else {
             jokeListPresenter.insertNewJokes(adapter.getJokesArrayList(), jokes);
         }
-        restoreLayoutManagerPosition();
     }
 
     @Override

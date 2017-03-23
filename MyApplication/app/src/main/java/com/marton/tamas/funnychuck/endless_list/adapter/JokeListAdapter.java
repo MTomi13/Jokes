@@ -81,7 +81,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.joke_text)
         TextView jokeTextView;
 
-        public JokeViewHolder(final View itemView) {
+        JokeViewHolder(final View itemView) {
             super(itemView);
         }
     }
@@ -91,7 +91,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         @BindView(R.id.progress_ring)
         ProgressBar progressRing;
 
-        public ProgressViewHolder(final View itemView) {
+        ProgressViewHolder(final View itemView) {
             super(itemView);
         }
     }

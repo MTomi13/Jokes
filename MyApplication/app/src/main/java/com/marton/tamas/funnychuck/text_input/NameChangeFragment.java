@@ -69,8 +69,7 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
     @OnClick(R.id.btn_submit)
     public void onSubmitButtonCLicked() {
         hideKeyboard();
-        String fullName = changeNameEditText.getText().toString().trim();
-        nameChangePresenter.getJokesWithChangedName(isFilter, fullName);
+        nameChangePresenter.getJokesWithChangedName(isFilter, changeNameEditText.getText().toString().trim());
     }
 
     @Override

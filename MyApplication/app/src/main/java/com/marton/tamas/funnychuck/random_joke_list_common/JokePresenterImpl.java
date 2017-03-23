@@ -9,11 +9,9 @@ import com.marton.tamas.funnychuck.common.BaseJokeView;
 public class JokePresenterImpl implements JokePresenter {
 
     private final JokeInteractorImpl jokeInteractor;
-    protected final BaseJokeView baseJokeView;
 
     public JokePresenterImpl(JokeInteractorImpl jokeInteractor, BaseJokeView baseJokeView) {
         this.jokeInteractor = jokeInteractor;
-        this.baseJokeView = baseJokeView;
     }
 
     @Override
