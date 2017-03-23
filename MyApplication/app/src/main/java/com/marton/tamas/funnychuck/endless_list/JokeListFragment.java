@@ -32,7 +32,7 @@ import jp.wasabeef.recyclerview.adapters.ScaleInAnimationAdapter;
 public class JokeListFragment extends BaseFragment implements JokeListView {
 
     private static final int ANIM_DURATION = 800;
-    private static final int REPRESENT_LOADING_DELAY = 2000;
+    private static final int REPRESENT_LOADING_DELAY = 5000;
     private static final int MAX_FETCH_JOKES_NUMBER = 20;
 
     @BindView(R.id.recyclerView)
@@ -58,7 +58,7 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         jokeListFragment.setArguments(bundle);
         return jokeListFragment;
     }
-
+    
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);

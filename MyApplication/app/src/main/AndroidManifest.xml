@@ -14,7 +14,7 @@
         <activity
             android:name="com.marton.tamas.funnychuck.home.HomeActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait">
+            android:configChanges="orientation|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

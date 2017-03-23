@@ -32,12 +32,18 @@ public abstract class BaseFragment extends DialogFragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // Retain this Fragment so that it will not be destroyed when an orientation
+        // change happens and we can keep our AsyncTask running
+        setRetainInstance(true);
+        setupDagger();
+        isFilter = getArguments().getBoolean(Constants.FILTER_FLAG);
+    }
+
+    private void setupDagger() {
         activityGraph = ((JokeApplication) getActivity().getApplicationContext()).getApplicationGraph().plus(new ActivityModule(this));
         activityGraph.inject(this);
-
-        isFilter = getArguments().getBoolean(Constants.FILTER_FLAG);
     }
 
     @Override
