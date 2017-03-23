@@ -25,9 +25,9 @@ public class NameChangePresenterImpl implements NameChangePresenter, JokeFetchLi
 
     @Override
     public void getJokesWithChangedName(boolean isFilterNeeded, String fullName) {
-        nameChangeView.showProgressRing(View.VISIBLE);
-        Name name = getName(fullName);
         if (!fullName.equals(Constants.EMPTY_STRING)) {
+            nameChangeView.showProgressRing(View.VISIBLE);
+            Name name = getName(fullName);
             if (isFilterNeeded) {
                 nameChangeInteractor.getJokeWithChangedNameAndFilter(name);
             } else {
