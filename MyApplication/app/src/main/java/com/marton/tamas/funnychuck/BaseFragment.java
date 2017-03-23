@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.marton.tamas.funnychuck.dependencies.ActivityModule;
+import com.marton.tamas.funnychuck.util.Constants;
 
 import butterknife.ButterKnife;
 import dagger.ObjectGraph;
@@ -20,6 +21,7 @@ import dagger.ObjectGraph;
 public abstract class BaseFragment extends DialogFragment {
 
     private ObjectGraph activityGraph;
+    protected boolean isFilter;
 
     @Nullable
     @Override
@@ -34,6 +36,8 @@ public abstract class BaseFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
         activityGraph = ((JokeApplication) getActivity().getApplicationContext()).getApplicationGraph().plus(new ActivityModule(this));
         activityGraph.inject(this);
+
+        isFilter = getArguments().getBoolean(Constants.FILTER_FLAG);
     }
 
     @Override

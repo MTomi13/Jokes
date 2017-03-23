@@ -14,6 +14,7 @@ import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
+import com.marton.tamas.funnychuck.util.Constants;
 
 import javax.inject.Inject;
 
@@ -25,8 +26,6 @@ import butterknife.OnClick;
  */
 
 public class NameChangeFragment extends BaseFragment implements NameChangeView {
-
-    private static final String FILTER_FLAG = "filter";
 
     @BindView(R.id.personEditText)
     EditText changeNameEditText;
@@ -42,6 +41,14 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
 
     @Inject
     NameChangePresenterImpl nameChangePresenter;
+
+    public static NameChangeFragment getInstance(boolean isFilter) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(Constants.FILTER_FLAG, isFilter);
+        NameChangeFragment nameChangeFragment = new NameChangeFragment();
+        nameChangeFragment.setArguments(bundle);
+        return nameChangeFragment;
+    }
 
     @Override
     protected int layoutId() {
@@ -63,7 +70,7 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
     public void onSubmitButtonCLicked() {
         hideKeyboard();
         String fullName = changeNameEditText.getText().toString().trim();
-        nameChangePresenter.getJokesWithChangedName(false, fullName);
+        nameChangePresenter.getJokesWithChangedName(isFilter, fullName);
     }
 
     @Override
@@ -83,8 +90,8 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
 
     public void hideKeyboard() {
         if (getActivity() != null && getActivity().getCurrentFocus() != null) {
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         }
     }
 }

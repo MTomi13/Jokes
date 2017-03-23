@@ -11,10 +11,11 @@ import android.view.View;
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
-import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
 import com.marton.tamas.funnychuck.endless_list.model.Item;
+import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.util.Constants;
 
 import java.util.ArrayList;
 
@@ -50,12 +51,20 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
         return R.layout.fragment_joke_list;
     }
 
+    public static JokeListFragment getInstance(boolean isFilter) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(Constants.FILTER_FLAG, isFilter);
+        JokeListFragment jokeListFragment = new JokeListFragment();
+        jokeListFragment.setArguments(bundle);
+        return jokeListFragment;
+    }
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setToolbarTitle(getString(R.string.endless_list_title));
         setupRecyclerView();
-        jokeListPresenter.getJokes(false, MAX_FETCH_JOKES_NUMBER);
+        jokeListPresenter.getJokes(isFilter, MAX_FETCH_JOKES_NUMBER);
     }
 
     protected void setToolbarTitle(String title) {
@@ -104,11 +113,17 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     @Override
     public void showListWithFooter() {
         adapter.getJokesArrayList().add(new Footer());
-        adapter.notifyItemInserted(adapter.getJokesArrayList().size() - 1);
+        new Handler().post(new Runnable() {
+            @Override
+            public void run() {
+                adapter.notifyItemInserted(adapter.getJokesArrayList().size() - 1);
+            }
+        });
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                jokeListPresenter.getJokes(false, MAX_FETCH_JOKES_NUMBER);
+                jokeListPresenter.getJokes(isFilter, MAX_FETCH_JOKES_NUMBER);
             }
         }, REPRESENT_LOADING_DELAY);
     }

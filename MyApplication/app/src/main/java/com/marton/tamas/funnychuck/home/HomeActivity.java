@@ -32,6 +32,8 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
     @BindView(R.id.uiMask)
     FrameLayout uiMask;
 
+    private boolean isFilterNeed;
+
     private FragmentManager supportFragmentManager;
 
     @Override
@@ -52,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     @OnClick(R.id.btn_random_joke)
     public void onRandomJokeBtnClicked() {
-        JokeDialogFragment jokeDialogFragment = JokeDialogFragment.getInstance();
+        JokeDialogFragment jokeDialogFragment = JokeDialogFragment.getInstance(isFilterNeed);
         jokeDialogFragment.show(getSupportFragmentManager(), JokeDialogFragment.class.getSimpleName());
     }
 
@@ -61,7 +63,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
         transaction.addToBackStack(NameChangeFragment.class.getSimpleName());
-        transaction.replace(R.id.container, new NameChangeFragment());
+        transaction.replace(R.id.container, NameChangeFragment.getInstance(isFilterNeed));
         transaction.commit();
         uiMask.setVisibility(View.VISIBLE);
     }
@@ -71,14 +73,14 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
         transaction.addToBackStack(JokeListFragment.class.getSimpleName());
-        transaction.replace(R.id.container, new JokeListFragment());
+        transaction.replace(R.id.container, JokeListFragment.getInstance(isFilterNeed));
         transaction.commit();
         uiMask.setVisibility(View.VISIBLE);
     }
 
     @OnCheckedChanged(R.id.deny_explicit)
     public void onFilterChecked() {
-
+        isFilterNeed = !isFilterNeed;
     }
 
     @Override

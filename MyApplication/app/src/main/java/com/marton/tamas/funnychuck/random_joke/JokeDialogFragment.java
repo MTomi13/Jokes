@@ -1,6 +1,7 @@
 package com.marton.tamas.funnychuck.random_joke;
 
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 import android.widget.ProgressBar;
@@ -10,6 +11,7 @@ import com.marton.tamas.funnychuck.BaseDialogFragment;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
 import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.util.Constants;
 
 import java.util.ArrayList;
 
@@ -32,8 +34,12 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     @Inject
     JokeDialogPresenterImpl jokeDialogPresenter;
 
-    public static JokeDialogFragment getInstance() {
-        return new JokeDialogFragment();
+    public static JokeDialogFragment getInstance(boolean isFilter) {
+        Bundle bundle = new Bundle();
+        bundle.putBoolean(Constants.FILTER_FLAG, isFilter);
+        JokeDialogFragment jokeDialogFragment = new JokeDialogFragment();
+        jokeDialogFragment.setArguments(bundle);
+        return jokeDialogFragment;
     }
 
     @Override
@@ -57,7 +63,7 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     public void onShow(DialogInterface dialogInterface) {
         textView = ButterKnife.findById(alertDialog, R.id.joke);
         progressBar = ButterKnife.findById(alertDialog, R.id.progress_ring);
-        jokeDialogPresenter.getJokes(false, 1);
+        jokeDialogPresenter.getJokes(isFilter, 1);
     }
 
     @Override
