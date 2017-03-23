@@ -6,7 +6,7 @@ import com.marton.tamas.funnychuck.common.BaseJokeInteractor;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public interface JokeInteractor extends BaseJokeInteractor {
+interface JokeInteractor extends BaseJokeInteractor {
 
     void getJokesFromApi(int numberOfJokes);
 

@@ -58,7 +58,7 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setToolbarTitle("Change name");
+        setToolbarTitle(getString(R.string.change_name_title));
     }
 
     protected void setToolbarTitle(String title) {

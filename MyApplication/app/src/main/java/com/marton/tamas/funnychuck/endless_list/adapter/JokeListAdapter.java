@@ -49,7 +49,7 @@ public class JokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewHolder = new JokeViewHolder(view);
         } else {
             View view = LayoutInflater.from(parent.getContext()).inflate(
-                    R.layout.progress_view, parent, false);
+                    R.layout.item_progress_view, parent, false);
             viewHolder = new ProgressViewHolder(view);
         }
         return viewHolder;

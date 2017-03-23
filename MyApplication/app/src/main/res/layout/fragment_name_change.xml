@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp"
+    android:padding="@dimen/name_change_padding"
     android:background="@android:color/white"
     android:orientation="vertical">
 
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:digits="abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-            android:hint="firstname / lastname"
+            android:hint="@string/person_edittext_hint"
             android:inputType="textPersonName|textCapWords|text" />
     </android.support.design.widget.TextInputLayout>
 
@@ -27,14 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/personLayout"
-        android:text="Submit" />
+        android:text="@string/submit_button" />
 
     <TextView
         android:id="@+id/joke_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_submit"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/joke_margin_top"
         tools:text="Chuck Norris was banned from competitive bullriding after a 1992 exhibition in San Antonio, when he rode the bull 1,346 miles from Texas to Milwaukee Wisconsin to pick up his dry cleaning." />
 
     <ProgressBar
@@ -44,6 +44,6 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_submit"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="@dimen/progress_ring_margin_top"
         android:visibility="gone" />
 </RelativeLayout>

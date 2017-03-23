@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_margin="30dp"
+        android:layout_margin="@dimen/content_view_margin"
         android:orientation="vertical"
         android:weightSum="5">
 
@@ -25,28 +25,28 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Random Joke" />
+            android:text="@string/random_joke" />
 
         <Button
             android:id="@+id/btn_text_input"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Text Input" />
+            android:text="@string/text_input" />
 
         <Button
             android:id="@+id/btn_lazy_list"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Never Ending List" />
+            android:text="@string/never_ending_list" />
 
         <CheckBox
             android:id="@+id/deny_explicit"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="No explicit" />
+            android:layout_marginTop="@dimen/checkbox_margin_top"
+            android:text="@string/no_explicit" />
     </LinearLayout>
 
     <FrameLayout

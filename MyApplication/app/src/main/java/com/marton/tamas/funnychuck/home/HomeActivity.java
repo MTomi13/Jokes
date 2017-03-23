@@ -60,20 +60,19 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
 
     @OnClick(R.id.btn_text_input)
     public void onTextInputBtnClicked() {
-        FragmentTransaction transaction = supportFragmentManager.beginTransaction();
-        transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
-        transaction.addToBackStack(NameChangeFragment.class.getSimpleName());
-        transaction.replace(R.id.container, NameChangeFragment.getInstance(isFilterNeed));
-        transaction.commit();
-        uiMask.setVisibility(View.VISIBLE);
+        replaceFragment(NameChangeFragment.getInstance(isFilterNeed), NameChangeFragment.class.getSimpleName());
     }
 
     @OnClick(R.id.btn_lazy_list)
     public void onEndlessListBtnClicked() {
+        replaceFragment(JokeListFragment.getInstance(isFilterNeed), JokeListFragment.class.getSimpleName());
+    }
+
+    private void replaceFragment(Fragment fragment, String tag) {
         FragmentTransaction transaction = supportFragmentManager.beginTransaction();
         transaction.setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right, 0, android.R.anim.slide_out_right);
-        transaction.addToBackStack(JokeListFragment.class.getSimpleName());
-        transaction.replace(R.id.container, JokeListFragment.getInstance(isFilterNeed));
+        transaction.addToBackStack(tag);
+        transaction.replace(R.id.container, fragment);
         transaction.commit();
         uiMask.setVisibility(View.VISIBLE);
     }
@@ -107,7 +106,7 @@ public class HomeActivity extends AppCompatActivity implements FragmentManager.O
         } else {
             finish();
         }
-        toolbar.setTitle("Funny Chuck");
+        toolbar.setTitle(R.string.app_name);
     }
 
     @Override

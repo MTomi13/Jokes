@@ -41,6 +41,7 @@ public class JokeInteractorImpl implements JokeInteractor, Callback<JokeListResp
         this.jokeFetchListener = jokeFetchListener;
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public void onResponse(Call<JokeListResponse> call, Response<JokeListResponse> response) {
         jokeFetchListener.onFetchJokesSuccess(response.body());

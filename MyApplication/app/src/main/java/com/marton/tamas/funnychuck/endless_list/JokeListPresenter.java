@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by tamas.marton on 21/03/2017.
  */
 
-public interface JokeListPresenter extends JokePresenter {
+interface JokeListPresenter extends JokePresenter {
 
     void addFooterItem(LinearLayoutManager linearLayoutManager, boolean hasFooter);
 

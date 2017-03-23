@@ -2,4 +2,11 @@
     <string name="app_name">Funny Chuck</string>
     <string name="endless_list_title">Joke List</string>
     <string name="joke_dialog_title">The Joke</string>
+    <string name="random_joke">Random Joke</string>
+    <string name="text_input">Text Input</string>
+    <string name="never_ending_list">Never Ending List</string>
+    <string name="no_explicit">No explicit</string>
+    <string name="person_edittext_hint">firstname / lastname</string>
+    <string name="submit_button">Submit</string>
+    <string name="change_name_title">Change name</string>
 </resources>
