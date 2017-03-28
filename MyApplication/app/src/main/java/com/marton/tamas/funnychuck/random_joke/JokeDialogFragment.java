@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
 
 public class JokeDialogFragment extends BaseDialogFragment implements JokeContentView {
 
+    private static final String PARCELABLE_JOKE = "parcelable joke";
+
     private TextView textView;
     private ProgressBar progressBar;
     private Joke joke;
@@ -79,7 +81,7 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            joke = savedInstanceState.getParcelable("data");
+            joke = savedInstanceState.getParcelable(PARCELABLE_JOKE);
         }
         return super.onCreateDialog(savedInstanceState);
     }
@@ -93,7 +95,7 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable("data", joke);
+        outState.putParcelable(PARCELABLE_JOKE, joke);
     }
 
     @Override
