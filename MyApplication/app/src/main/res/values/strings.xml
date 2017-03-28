@@ -9,4 +9,5 @@
     <string name="person_edittext_hint">firstname / lastname</string>
     <string name="submit_button">Submit</string>
     <string name="change_name_title">Change name</string>
+    <string name="layout_exception">LayoutType: %d</string>
 </resources>

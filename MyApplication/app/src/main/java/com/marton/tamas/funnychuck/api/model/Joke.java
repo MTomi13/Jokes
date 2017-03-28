@@ -4,13 +4,14 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.Expose;
-import com.marton.tamas.funnychuck.endless_list.model.Item;
+import com.marton.tamas.funnychuck.endless_list.model.TypeFactory;
+import com.marton.tamas.funnychuck.endless_list.model.Visitable;
 
 /**
  * Created by tamas.marton on 21/03/2017.
  */
 
-public class Joke extends Item implements Parcelable {
+public class Joke implements Visitable, Parcelable {
 
     @Expose
     private Integer id;
@@ -31,6 +32,11 @@ public class Joke extends Item implements Parcelable {
 
     public void setJoke(String joke) {
         this.joke = joke;
+    }
+
+    @Override
+    public int type(TypeFactory typeFactory) {
+        return typeFactory.type(this);
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.marton.tamas.funnychuck.common;
 
-import com.marton.tamas.funnychuck.endless_list.model.Item;
-
 import java.util.ArrayList;
 
 /**

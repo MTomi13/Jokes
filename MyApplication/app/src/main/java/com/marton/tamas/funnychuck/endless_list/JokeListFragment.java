@@ -10,7 +10,8 @@ import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
-import com.marton.tamas.funnychuck.endless_list.model.Item;
+import com.marton.tamas.funnychuck.endless_list.model.TypeFactoryImpl;
+import com.marton.tamas.funnychuck.endless_list.model.Visitable;
 import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.util.Constants;
 import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
@@ -82,19 +83,19 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     }
 
     @Override
-    public void showJokes(ArrayList<Item> jokes) {
+    public void showJokes(ArrayList<Visitable> jokes) {
         setupRecyclerView();
         setupRecycleViewAdapter(jokes);
     }
 
     /**
-     * @param jokes ArrayList<Item>
+     * @param jokes ArrayList<Visitable>
      *              setup recyclerview adapter, if it is null, create it with animation,
      *              if it is exist just insert the new jokes
      */
-    private void setupRecycleViewAdapter(ArrayList<Item> jokes) {
+    private void setupRecycleViewAdapter(ArrayList<Visitable> jokes) {
         if (adapter == null) {
-            adapter = new JokeListAdapter(jokes);
+            adapter = new JokeListAdapter(jokes, new TypeFactoryImpl());
             AlphaInAnimationAdapter alphaAdapter = new AlphaInAnimationAdapter(adapter);
             ScaleInAnimationAdapter scaleAdapter = new ScaleInAnimationAdapter(alphaAdapter);
             scaleAdapter.setDuration(ANIM_DURATION);
