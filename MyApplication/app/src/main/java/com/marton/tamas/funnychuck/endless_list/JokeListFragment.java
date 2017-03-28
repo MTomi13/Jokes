@@ -5,17 +5,15 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.marton.tamas.funnychuck.BaseFragment;
-import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
 import com.marton.tamas.funnychuck.endless_list.model.Item;
 import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.util.Constants;
+import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 
 import java.util.ArrayList;
 
@@ -62,16 +60,9 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        setToolbarTitle(getString(R.string.endless_list_title));
-        setupRecyclerView();
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         jokeListPresenter.getJokes(isFilter, MAX_FETCH_JOKES_NUMBER);
-    }
-
-    private void setToolbarTitle(String title) {
-        Toolbar toolbar = (Toolbar) getActivity().findViewById(R.id.toolbar);
-        toolbar.setTitle(title);
     }
 
     private void setupRecyclerView() {
@@ -92,6 +83,7 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
 
     @Override
     public void showJokes(ArrayList<Item> jokes) {
+        setupRecyclerView();
         setupRecycleViewAdapter(jokes);
     }
 
