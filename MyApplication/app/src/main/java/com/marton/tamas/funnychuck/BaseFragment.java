@@ -22,11 +22,15 @@ public abstract class BaseFragment extends DialogFragment {
 
     private ObjectGraph activityGraph;
     protected boolean isFilter;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(layoutId(), null);
+        if(view!=null){
+            return view;
+        }
+        view = inflater.inflate(layoutId(), null);
         ButterKnife.bind(this, view);
         return view;
     }

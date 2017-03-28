@@ -13,13 +13,19 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name="com.marton.tamas.funnychuck.home.HomeActivity"
-            android:launchMode="singleTop"
-            android:configChanges="orientation|screenSize">
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.marton.tamas.funnychuck.endless_list.JokeListActivity"
+            android:launchMode="singleTop">
+        </activity>
+        <activity
+            android:name="com.marton.tamas.funnychuck.text_input.NameChangeActivity"
+            android:launchMode="singleTop">
+        </activity>
     </application>
-
 </manifest>
