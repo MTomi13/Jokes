@@ -1,9 +1,12 @@
 package com.marton.tamas.funnychuck.random_joke;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
+import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -27,6 +30,7 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
 
     private TextView textView;
     private ProgressBar progressBar;
+    private Joke joke;
 
     @Inject
     JokeInteractorImpl jokeInteractor;
@@ -63,12 +67,33 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     public void onShow(DialogInterface dialogInterface) {
         textView = ButterKnife.findById(alertDialog, R.id.joke);
         progressBar = ButterKnife.findById(alertDialog, R.id.progress_ring);
-        jokeDialogPresenter.getJokes(isFilter, 1);
+        if (joke != null) {
+            textView.setText(joke.getJoke());
+            showProgressRing(View.GONE);
+        } else {
+            jokeDialogPresenter.getJokes(isFilter, 1);
+        }
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        if (savedInstanceState != null) {
+            joke = savedInstanceState.getParcelable("data");
+        }
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Override
     public void showJokes(ArrayList<Joke> jokes) {
-        textView.setText(jokes.get(0).getJoke());
+        joke = jokes.get(0);
+        textView.setText(joke.getJoke());
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable("data", joke);
     }
 
     @Override

@@ -22,10 +22,8 @@ public abstract class BaseDialogFragment extends BaseFragment implements DialogI
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.Theme_Joke_Main_Dialog);
         View view = View.inflate(getContext(), layoutId(), null);
-
         alertDialog = getDialogBuilder(contextThemeWrapper).setView(view).create();
         alertDialog.setOnShowListener(this);
-        alertDialog.setCancelable(false);
         return alertDialog;
     }
 
@@ -33,6 +31,15 @@ public abstract class BaseDialogFragment extends BaseFragment implements DialogI
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getDialog().setCanceledOnTouchOutside(false);
+    }
+
+    @Override
+    public void onDestroyView() {
+        Dialog dialog = getDialog();
+        if (dialog != null && getRetainInstance()) {
+            dialog.setDismissMessage(null);
+        }
+        super.onDestroyView();
     }
 
     protected abstract AlertDialog.Builder getDialogBuilder(ContextThemeWrapper contextThemeWrapper);
