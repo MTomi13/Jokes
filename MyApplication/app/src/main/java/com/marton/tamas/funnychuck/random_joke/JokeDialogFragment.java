@@ -13,7 +13,9 @@ import android.widget.TextView;
 import com.marton.tamas.funnychuck.BaseDialogFragment;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
-import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
+import com.marton.tamas.funnychuck.dependencies.ApplicationComponent;
+import com.marton.tamas.funnychuck.random_joke.dagger.DaggerJokeDialogComponent;
+import com.marton.tamas.funnychuck.random_joke.dagger.JokeDialogModule;
 import com.marton.tamas.funnychuck.util.Constants;
 
 import java.util.ArrayList;
@@ -33,9 +35,6 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     private TextView textView;
     private ProgressBar progressBar;
     private Joke joke;
-
-    @Inject
-    JokeInteractorImpl jokeInteractor;
 
     @Inject
     JokeDialogPresenterImpl jokeDialogPresenter;
@@ -63,6 +62,15 @@ public class JokeDialogFragment extends BaseDialogFragment implements JokeConten
     @Override
     protected int layoutId() {
         return R.layout.fragment_joke_dialog;
+    }
+
+    @Override
+    protected void setupComponent(ApplicationComponent applicationComponent) {
+        DaggerJokeDialogComponent.builder()
+                .applicationComponent(applicationComponent)
+                .jokeDialogModule(new JokeDialogModule(this))
+                .build()
+                .inject(this);
     }
 
     @Override

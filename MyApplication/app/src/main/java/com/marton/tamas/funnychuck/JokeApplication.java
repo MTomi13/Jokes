@@ -1,11 +1,11 @@
 package com.marton.tamas.funnychuck;
 
 import android.app.Application;
+import android.content.Context;
 
-import com.marton.tamas.funnychuck.dependencies.ApplicationModule;
-import com.marton.tamas.funnychuck.dependencies.NetworkModule;
-
-import dagger.ObjectGraph;
+import com.marton.tamas.funnychuck.dependencies.ApplicationComponent;
+import com.marton.tamas.funnychuck.dependencies.DaggerApplicationComponent;
+import com.marton.tamas.funnychuck.dependencies.DomainModule;
 
 /**
  * Created by tamas.marton on 21/03/2017.
@@ -13,22 +13,26 @@ import dagger.ObjectGraph;
 
 public class JokeApplication extends Application {
 
-    private ObjectGraph objectGraph;
+    private ApplicationComponent component;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        setupObjectGraph();
+        setupGraph();
     }
 
-    /**
-     * setup objectGraph for dependency handling
-     */
-    private void setupObjectGraph() {
-        objectGraph = ObjectGraph.create(new ApplicationModule(this), new NetworkModule());
+    private void setupGraph() {
+        component = DaggerApplicationComponent.builder()
+                .domainModule(new DomainModule(this))
+                .build();
+        component.inject(this);
     }
 
-    public ObjectGraph getApplicationGraph() {
-        return objectGraph;
+    public ApplicationComponent component() {
+        return component;
+    }
+
+    public static JokeApplication get(Context context) {
+        return (JokeApplication) context.getApplicationContext();
     }
 }

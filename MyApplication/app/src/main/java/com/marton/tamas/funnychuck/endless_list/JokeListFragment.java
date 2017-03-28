@@ -8,11 +8,13 @@ import android.support.v7.widget.RecyclerView;
 
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.R;
+import com.marton.tamas.funnychuck.dependencies.ApplicationComponent;
+import com.marton.tamas.funnychuck.endless_list.dagger.DaggerJokeListComponent;
+import com.marton.tamas.funnychuck.endless_list.dagger.JokeListModule;
 import com.marton.tamas.funnychuck.endless_list.adapter.JokeListAdapter;
 import com.marton.tamas.funnychuck.endless_list.model.Footer;
 import com.marton.tamas.funnychuck.endless_list.model.TypeFactoryImpl;
 import com.marton.tamas.funnychuck.endless_list.model.Visitable;
-import com.marton.tamas.funnychuck.random_joke_list_common.JokeInteractorImpl;
 import com.marton.tamas.funnychuck.util.Constants;
 import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 
@@ -40,9 +42,6 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     RecyclerView recyclerView;
 
     @Inject
-    JokeInteractorImpl jokeListInteractor;
-
-    @Inject
     JokeListPresenterImpl jokeListPresenter;
 
     private JokeListAdapter adapter;
@@ -50,6 +49,15 @@ public class JokeListFragment extends BaseFragment implements JokeListView {
     @Override
     protected int layoutId() {
         return R.layout.fragment_joke_list;
+    }
+
+    @Override
+    protected void setupComponent(ApplicationComponent applicationComponent) {
+        DaggerJokeListComponent.builder()
+                .applicationComponent(applicationComponent)
+                .jokeListModule(new JokeListModule(this))
+                .build()
+                .inject(this);
     }
 
     public static JokeListFragment getInstance(boolean isFilter) {

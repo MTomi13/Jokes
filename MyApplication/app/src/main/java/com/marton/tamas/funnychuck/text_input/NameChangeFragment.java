@@ -10,6 +10,9 @@ import android.widget.TextView;
 import com.marton.tamas.funnychuck.BaseFragment;
 import com.marton.tamas.funnychuck.R;
 import com.marton.tamas.funnychuck.api.model.Joke;
+import com.marton.tamas.funnychuck.dependencies.ApplicationComponent;
+import com.marton.tamas.funnychuck.text_input.dagger.DaggerNameChangeComponent;
+import com.marton.tamas.funnychuck.text_input.dagger.NameChangeModule;
 import com.marton.tamas.funnychuck.util.Constants;
 import com.marton.tamas.funnychuck.util.GeneralErrorHandler;
 
@@ -34,9 +37,6 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
     ProgressBar progressBar;
 
     @Inject
-    NameChangeInteractorImpl nameChangeInteractor;
-
-    @Inject
     NameChangePresenterImpl nameChangePresenter;
 
     public static NameChangeFragment getInstance(boolean isFilter) {
@@ -50,6 +50,15 @@ public class NameChangeFragment extends BaseFragment implements NameChangeView {
     @Override
     protected int layoutId() {
         return R.layout.fragment_name_change;
+    }
+
+    @Override
+    protected void setupComponent(ApplicationComponent applicationComponent) {
+        DaggerNameChangeComponent.builder()
+                .applicationComponent(applicationComponent)
+                .nameChangeModule(new NameChangeModule(this))
+                .build()
+                .inject(this);
     }
 
     @OnClick(R.id.btn_submit)
